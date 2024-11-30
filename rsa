@@ -1,0 +1,36 @@
+#!/usr/bin/python3
+def isprime(x):
+	if (x % 2 == 0) and (x != 2):
+		return False
+	i = 3
+	while (i ** 2 < x):
+		if (x % i == 0):
+			return False
+		i += 2
+	return True
+
+def findbig(x):
+	i = 3
+	while (i < x):
+		if (x % i == 0) and isprime(i):
+			break
+		i += 2
+	j =  x / i
+	return int(i), int(j)
+def findfactor(x):
+	x = int(x)
+	if x > 10000:
+		i, j = findbig(x)
+		print(f"{x}={j}*{i}")
+		return
+	for i in range(2, x):
+		for j in range(2, x):
+			if (i * j == x) and isprime(j) and isprime(i):
+				print(f"{x}={j}*{i}")
+				return
+if __name__ == "__main__":
+	import sys
+	with open(sys.argv[1]) as fi:
+		for line in fi:
+			i = line[:-1]
+			findfactor(i)
